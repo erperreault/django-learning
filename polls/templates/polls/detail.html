@@ -1,0 +1,21 @@
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<!-- method post vs method get when sending data to server -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+
+<!-- protect against Cross Site Request Forgeries -->
+{% csrf_token %}
+
+{% for choice in question.choice_set.all %}
+	<!-- response is sent as POST "choice=#" with id number -->
+	<!-- forloop.counter returns 1 on first loop, then 2, etc -->
+	<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+	<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+
+<input type="submit" value="vote">
+</form>

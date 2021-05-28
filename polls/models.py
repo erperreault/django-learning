@@ -24,6 +24,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     # associates each Choice to a Question
+    # each such question is given a choice_set field (see RelatedManager)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     choice_text = models.CharField(max_length=200)
