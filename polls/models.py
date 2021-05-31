@@ -1,7 +1,8 @@
-import  datetime
+import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib import admin
 
 
 # Definitions of data models.
@@ -18,6 +19,13 @@ class Question(models.Model):
     # str() methods make db more readable
     def __str__(self):
         return self.question_text
+
+    # from django.contrib, prettifies display for arbitrary method
+    @admin.display(
+        boolean=True,
+        ordering='pub_date',
+        description='Published recently?',
+    )
 
     def was_published_recently(self):
         now = timezone.now()
