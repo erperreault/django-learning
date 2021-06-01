@@ -8,7 +8,7 @@
             <table>
                 <tr>
                     <td><input class="button" type="button" value="C" onclick=reset()></td>
-                    <td><input class="button" type="button" value="<" onclick=back_one()></td>
+                    <td><input class="button" type="button" value="D" onclick=back_one()></td>
                     <td><input class="button" type="button" value="/" onclick=insert_operator("/")></td>
                     <td><input class="button" type="button" value="*" onclick=insert_operator("*")></td>
                 </tr>
@@ -53,7 +53,6 @@
             }
 
             function insert_dot() {
-                let re = /[\/*-+]/;
                 let current_num = "";
                 if (document.form.screen.value.match(re)) {
                     current_num = document.form.screen.value.split(re)[1];
@@ -74,6 +73,14 @@
                 document.form.screen.value = document.form.screen.value.slice(0, -1);
             }
 
+            function solve() {
+                let re = /[\/*-+]/;
+                let target = document.form.screen.value;
+                if (target.match(re)) {
+                    let operand_a = target.slice(re)[0];
+                    let operand_b = target.slice(re)[1];
+                }
+            }
         </script> 
 
         <style>
