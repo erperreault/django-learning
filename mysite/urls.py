@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    # pulls in URLconf for polls branch
+    # pulls in URLconf for polls calc
     path('polls/', include('polls.urls')),
 
+    # pulls in URLconf for calc app
+    path('calc/', include('calc.urls')),
+    
     # this is the only case not to use include()
     path('admin/', admin.site.urls),
 ]
