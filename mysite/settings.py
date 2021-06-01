@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # pull in any desired apps here
     'polls.apps.PollsConfig',
+    'calc.apps.CalcConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

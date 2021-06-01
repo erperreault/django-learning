@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <header>A CALCULATOR</header><br>
+
+        <label for="input">Input:</label>
+        <input type="text" placeholder="Enter formula here" id="input" name="input">
+        <button type="button" onclick="getValue();">Calculate</button>
+
+        <script>
+            function getValue() {
+                let value = document.getElementById("input").value;
+                alert(value);
+            }
+        </script>
+
+        {{ value }}
+    </body>
+</html>

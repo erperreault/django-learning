@@ -7,5 +7,5 @@ app_name = 'calc'
 
 urlpatterns = [
     # path '' = root
-    path('', views.current_datetime, name='index'),
+    path('', views.index, name='index'),
 ]
