@@ -1,22 +1,100 @@
 <html>
     <body>
-        <header>A CALCULATOR</header><br>
+        <div class="main">
+            <form name="form">            
+                <input class="screen" name="screen" readonly="readonly">
+            </form>
 
-        <label for="input">Input:</label>
-        <input placeholder="Enter formula here" id="input">
-        <button onclick="getValue();">Calculate</button>
-        <p>Output: <span id="output">0</span></p>
+            <table>
+                <tr>
+                    <td><input class="button" type="button" value="C" onclick=reset()></td>
+                    <td><input class="button" type="button" value="<" onclick=back_one()></td>
+                    <td><input class="button" type="button" value="/" onclick=insert_operator("/")></td>
+                    <td><input class="button" type="button" value="*" onclick=insert_operator("*")></td>
+                </tr>
+                <tr>
+                    <td><input class="button" type="button" value="7" onclick=insert(7)></td>
+                    <td><input class="button" type="button" value="8" onclick=insert(8)></td>
+                    <td><input class="button" type="button" value="9" onclick=insert(9)></td>
+                    <td><input class="button" type="button" value="-" onclick=insert_operator("-")></td>
+                </tr>
+                <tr>
+                    <td><input class="button" type="button" value="4" onclick=insert(4)></td>
+                    <td><input class="button" type="button" value="5" onclick=insert(5)></td>
+                    <td><input class="button" type="button" value="6" onclick=insert(6)></td>
+                    <td><input class="button" type="button" value="+" onclick=insert_operator("+")></td>
+                </tr>
+                <tr>
+                    <td><input class="button" type="button" value="1" onclick=insert(1)></td>
+                    <td><input class="button" type="button" value="2" onclick=insert(2)></td>
+                    <td><input class="button" type="button" value="3" onclick=insert(3)></td>
+                    <td><input class="button" type="button" value="=" onclick=solve()></td>
+                </tr>
+                <tr>
+                    <td><input class="button" type="button" value="0" onclick=insert(0)></td>
+                    <td><input class="button" type="button" value="." onclick=insert_dot(".")></td>
+                </tr>
+            </table>
+
+        </div>
 
         <script>
-            function getValue() {
-                let input = document.getElementById("input");
-                input.addEventListener("keyup", function(event) {
-                    if (event.keyCode == 13) {
-                        let value = input.value;
-                        document.getElementById("output").innerHTML = value;
-                    }
-                })
+            function insert(num) {
+                document.form.screen.value = document.form.screen.value + num;
             }
-        </script>
+
+            function insert_operator(symbol) {
+                let re = /[\/*-+]/;
+                if (document.form.screen.value.match(re)) {
+                    return
+                } else {
+                    document.form.screen.value += symbol;
+                }
+            }
+
+            function insert_dot() {
+                let re = /[\/*-+]/;
+                let current_num = "";
+                if (document.form.screen.value.match(re)) {
+                    current_num = document.form.screen.value.split(re)[1];
+                } else {
+                    current_num = document.form.screen.value;
+                }
+
+                if (!current_num.includes(".")) {
+                    document.form.screen.value += ".";
+                }
+            }
+
+            function reset() {
+                document.form.screen.value = "";
+            }
+
+            function back_one() {
+                document.form.screen.value = document.form.screen.value.slice(0, -1);
+            }
+
+        </script> 
+
+        <style>
+            *{
+                margin:2;
+                padding:0;
+            }            
+
+            .button {
+                width:50;
+                height:50;
+                font-size:25;
+            }
+
+            .screen {
+                width:220;
+                height:50;
+                font-size:25;
+                text-align:right;
+            }            
+        </style>
+
     </body>
 </html>
