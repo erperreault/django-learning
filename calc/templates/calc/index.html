@@ -5,14 +5,13 @@
         <label for="input">Input:</label>
         <input type="text" placeholder="Enter formula here" id="input" name="input">
         <button type="button" onclick="getValue();">Calculate</button>
+        <p>Output: <span id="output">0</span></p>
 
         <script>
             function getValue() {
                 let value = document.getElementById("input").value;
-                alert(value);
+                document.getElementById("output").innerHTML = value;
             }
         </script>
-
-        {{ value }}
     </body>
 </html>
