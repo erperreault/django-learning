@@ -2,7 +2,7 @@
     <body>
         <div class="main">
             <form name="form">            
-                <input class="screen" name="screen" readonly="readonly">
+                <input class="screen" value="0" name="screen" readonly="readonly">
             </form>
 
             <table>
@@ -13,7 +13,7 @@
                     <td><input class="button" type="button" value="*" onclick=insert_operator("*")></td>
                 </tr>
                 <tr>
-                    <td><input class="button" type="button" value="7" onclick=insert(7)></td>
+                    <td><input class="button" type="button" accesskey="h" value="7" onclick=insert(7)></td>
                     <td><input class="button" type="button" value="8" onclick=insert(8)></td>
                     <td><input class="button" type="button" value="9" onclick=insert(9)></td>
                     <td><input class="button" type="button" value="-" onclick=insert_operator("-")></td>
@@ -31,7 +31,7 @@
                     <td><input class="button" type="button" value="=" onclick=solve()></td>
                 </tr>
                 <tr>
-                    <td><input class="button" type="button" value="0" onclick=insert(0)></td>
+                    <td><input class="button" type="button" value="0" onclick=insert_zero()></td>
                     <td><input class="button" type="button" value="." onclick=insert_dot(".")></td>
                 </tr>
             </table>
@@ -39,25 +39,30 @@
         </div>
 
         <script>
+            var operator_re = /[\/*-+]/
+
             function insert(num) {
-                document.form.screen.value = document.form.screen.value + num;
+                let entry = document.form.screen.value;
+                if (entry == "0") {
+                    document.form.screen.value = num;
+                } else {
+                    document.form.screen.value = document.form.screen.value + num;
+                }
             }
 
-            function insert_operator(symbol) {
-                let re = /[\/*-+]/;
-                if (document.form.screen.value.match(re)) {
-                    return
-                } else {
-                    document.form.screen.value += symbol;
+            function insert_zero() {
+                let entry = document.form.screen.value;
+                if (entry != "0") {
+                    document.form.screen.value += 0;
                 }
             }
 
             function insert_dot() {
-                let current_num = "";
-                if (document.form.screen.value.match(re)) {
-                    current_num = document.form.screen.value.split(re)[1];
+                let entry = document.form.screen.value;
+                if (entry.match(operator_re)) {
+                    var current_num = entry.split(operator_re)[1];
                 } else {
-                    current_num = document.form.screen.value;
+                    var current_num = entry;
                 }
 
                 if (!current_num.includes(".")) {
@@ -65,8 +70,17 @@
                 }
             }
 
+            function insert_operator(symbol) {
+                let entry = document.form.screen.value;
+                if (entry.match(operator_re)) {
+                    return
+                } else {
+                    document.form.screen.value += symbol;
+                }
+            }
+
             function reset() {
-                document.form.screen.value = "";
+                document.form.screen.value = "0";
             }
 
             function back_one() {
@@ -76,9 +90,10 @@
             function solve() {
                 let re = /[\/*-+]/;
                 let target = document.form.screen.value;
-                if (target.match(re)) {
-                    let operand_a = target.slice(re)[0];
-                    let operand_b = target.slice(re)[1];
+                if (target.match(operator_re)) {
+                    let operand_a = target.slice(operator_re)[0];
+                    let operand_b = target.slice(operator_re)[1];
+                let re = /[\/*-+]/;
                 }
             }
         </script> 
