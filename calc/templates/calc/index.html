@@ -1,119 +1,76 @@
 <html>
     <body>
         <div class="main">
-            <form name="form">            
-                <input class="screen" value="0" name="screen" readonly="readonly">
-            </form>
 
-            <table>
-                <tr>
-                    <td><input class="button" type="button" value="C" onclick=reset()></td>
-                    <td><input class="button" type="button" value="D" onclick=back_one()></td>
-                    <td><input class="button" type="button" value="/" onclick=insert_operator("/")></td>
-                    <td><input class="button" type="button" value="*" onclick=insert_operator("*")></td>
-                </tr>
-                <tr>
-                    <td><input class="button" type="button" accesskey="h" value="7" onclick=insert(7)></td>
-                    <td><input class="button" type="button" value="8" onclick=insert(8)></td>
-                    <td><input class="button" type="button" value="9" onclick=insert(9)></td>
-                    <td><input class="button" type="button" value="-" onclick=insert_operator("-")></td>
-                </tr>
-                <tr>
-                    <td><input class="button" type="button" value="4" onclick=insert(4)></td>
-                    <td><input class="button" type="button" value="5" onclick=insert(5)></td>
-                    <td><input class="button" type="button" value="6" onclick=insert(6)></td>
-                    <td><input class="button" type="button" value="+" onclick=insert_operator("+")></td>
-                </tr>
-                <tr>
-                    <td><input class="button" type="button" value="1" onclick=insert(1)></td>
-                    <td><input class="button" type="button" value="2" onclick=insert(2)></td>
-                    <td><input class="button" type="button" value="3" onclick=insert(3)></td>
-                    <td><input class="button" type="button" value="=" onclick=solve()></td>
-                </tr>
-                <tr>
-                    <td><input class="button" type="button" value="0" onclick=insert_zero()></td>
-                    <td><input class="button" type="button" value="." onclick=insert_dot(".")></td>
-                </tr>
-            </table>
+            <input class="screen" id="screen" value="" readonly="true">
 
         </div>
 
         <script>
-            var operator_re = /[\/*-+]/
+            const operator_re = /[/*+\-]/;
+            var screen = document.getElementById("screen");
 
-            function insert(num) {
-                let entry = document.form.screen.value;
-                if (entry == "0") {
-                    document.form.screen.value = num;
+            document.addEventListener("keydown", function (event) {
+                if (/^[a-zA-Z0-9+*/\-]$/.test(event.key)) {
+                    if (screen.value.length < 16) {
+                        screen.value += event.key;
+                    }
                 } else {
-                    document.form.screen.value = document.form.screen.value + num;
+                    switch (event.key) {
+                        case "Backspace":
+                            screen.value = screen.value.slice(0, -1);
+                            break;
+                        case "Enter":
+                            solve(screen.value);
+                            break;
+                    }
                 }
-            }
+            });
 
-            function insert_zero() {
-                let entry = document.form.screen.value;
-                if (entry != "0") {
-                    document.form.screen.value += 0;
-                }
-            }
+            function solve(input) {
+                if (input.match(operator_re)) {
+                    // TODO: replace above with validation method
+                    let input_s = input.split(operator_re);
+                    let operand_a = parseFloat(input_s[0]);
+                    let operand_b = parseFloat(input_s[1]);
+                    let operator = input.match(operator_re)[0];
 
-            function insert_dot() {
-                let entry = document.form.screen.value;
-                if (entry.match(operator_re)) {
-                    var current_num = entry.split(operator_re)[1];
+                    switch (operator) {
+                        case "+":
+                            screen.value = operand_a + operand_b;
+                            break;
+                        case "-":
+                            screen.value = operand_a - operand_b;
+                            break;
+                        case "*":
+                            screen.value = operand_a * operand_b;
+                            break;
+                        case "/":
+                            screen.value = operand_a / operand_b;
+                            break;
+                    }
                 } else {
-                    var current_num = entry;
-                }
-
-                if (!current_num.includes(".")) {
-                    document.form.screen.value += ".";
-                }
-            }
-
-            function insert_operator(symbol) {
-                let entry = document.form.screen.value;
-                if (entry.match(operator_re)) {
-                    return
-                } else {
-                    document.form.screen.value += symbol;
-                }
-            }
-
-            function reset() {
-                document.form.screen.value = "0";
-            }
-
-            function back_one() {
-                document.form.screen.value = document.form.screen.value.slice(0, -1);
-            }
-
-            function solve() {
-                let re = /[\/*-+]/;
-                let target = document.form.screen.value;
-                if (target.match(operator_re)) {
-                    let operand_a = target.slice(operator_re)[0];
-                    let operand_b = target.slice(operator_re)[1];
-                let re = /[\/*-+]/;
+                    screen.value = '';
                 }
             }
         </script> 
 
         <style>
-            *{
-                margin:2;
-                padding:0;
+            .main{
+                height: 90%;
+                position:relative;
             }            
 
-            .button {
-                width:50;
-                height:50;
-                font-size:25;
-            }
-
             .screen {
-                width:220;
+                width:255;
                 height:50;
+                position:absolute;
+                top:50%;
+                left:50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
                 font-size:25;
+                font-family:monospace;
                 text-align:right;
             }            
         </style>
