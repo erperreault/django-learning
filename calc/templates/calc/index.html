@@ -9,20 +9,38 @@
         <script>
             const operator_re = /[/*+\-]/;
             var screen = document.getElementById("screen");
+            var listening = true;
+
+            document.addEventListener("keyup", function (event) {
+                if (["Control", "Alt", "Meta"].includes(event.key)) {
+                    listening = true;
+                    alert("listening again");
+                }
+            });
 
             document.addEventListener("keydown", function (event) {
-                if (/^[a-zA-Z0-9+*/\-]$/.test(event.key)) {
-                    if (screen.value.length < 16) {
-                        screen.value += event.key;
-                    }
-                } else {
-                    switch (event.key) {
-                        case "Backspace":
-                            screen.value = screen.value.slice(0, -1);
-                            break;
-                        case "Enter":
-                            solve(screen.value);
-                            break;
+                if (listening) {
+                    if (["Control", "Alt", "Meta", "Escape"].includes(event.key)) {
+                        event.preventDefault();
+                        listening = false;
+                    } else {
+                        if (/^[a-zA-Z0-9.+*\-]$/.test(event.key)) {
+                            if (screen.value.length < 16) {
+                                screen.value += event.key;
+                            }
+                        } else if (event.key == "/") {
+                            event.preventDefault();
+                            screen.value += "/";
+                        } else {
+                            switch (event.key) {
+                                case "Backspace":
+                                    screen.value = screen.value.slice(0, -1);
+                                    break;
+                                case "Enter":
+                                    solve(screen.value);
+                                    break;
+                            }
+                        }
                     }
                 }
             });
