@@ -1,0 +1,97 @@
+<html>
+    <body>
+        <div class="main">
+
+            <input class="screen" id="screen" value="" readonly="true">
+
+        </div>
+
+        <script>
+            const operator_re = /[/*+\-]/;
+            var screen = document.getElementById("screen");
+            var listening = true;
+
+            document.addEventListener("keyup", function (event) {
+                if (["Control", "Alt", "Meta"].includes(event.key)) {
+                    listening = true;
+                    alert("listening again");
+                }
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (listening) {
+                    if (["Control", "Alt", "Meta", "Escape"].includes(event.key)) {
+                        event.preventDefault();
+                        listening = false;
+                    } else {
+                        if (/^[a-zA-Z0-9.+*\-]$/.test(event.key)) {
+                            if (screen.value.length < 16) {
+                                screen.value += event.key;
+                            }
+                        } else if (event.key == "/") {
+                            event.preventDefault();
+                            screen.value += "/";
+                        } else {
+                            switch (event.key) {
+                                case "Backspace":
+                                    screen.value = screen.value.slice(0, -1);
+                                    break;
+                                case "Enter":
+                                    solve(screen.value);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            });
+
+            function solve(input) {
+                if (input.match(operator_re)) {
+                    // TODO: replace above with validation method
+                    let input_s = input.split(operator_re);
+                    let operand_a = parseFloat(input_s[0]);
+                    let operand_b = parseFloat(input_s[1]);
+                    let operator = input.match(operator_re)[0];
+
+                    switch (operator) {
+                        case "+":
+                            screen.value = operand_a + operand_b;
+                            break;
+                        case "-":
+                            screen.value = operand_a - operand_b;
+                            break;
+                        case "*":
+                            screen.value = operand_a * operand_b;
+                            break;
+                        case "/":
+                            screen.value = operand_a / operand_b;
+                            break;
+                    }
+                } else {
+                    screen.value = '';
+                }
+            }
+        </script> 
+
+        <style>
+            .main{
+                height: 90%;
+                position:relative;
+            }            
+
+            .screen {
+                width:255;
+                height:50;
+                position:absolute;
+                top:50%;
+                left:50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                font-size:25;
+                font-family:monospace;
+                text-align:right;
+            }            
+        </style>
+
+    </body>
+</html>

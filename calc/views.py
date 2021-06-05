@@ -1,7 +1,8 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 import datetime
 
-def current_datetime(request):
+def index(request):
     now = datetime.datetime.now()
-    html = f"<html><body>It is now {now}.</body></html>"
-    return HttpResponse(html)
+    context = {'now' : now}
+    return render(request, 'calc/index.html', context) 
