@@ -3,4 +3,4 @@ from django.shortcuts import render
 import datetime
 
 def index(request):
-    return render(request, 'calc/index.html') 
+    return render(request, 'viz/index.html') 
