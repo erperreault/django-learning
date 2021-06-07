@@ -2,7 +2,7 @@
 
 A simple website with learning and practice projects using Django, Python, HTML, CSS, and JavaScript.
 
-* /mysite/ and /polls/ are websites made while following the [Django official tutorial](https://docs.djangoproject.com/en/3.2/intro/tutorial01/), with additional comments.
+* /polls/ is a website made while following the [Django official tutorial](https://docs.djangoproject.com/en/3.2/intro/tutorial01/), with additional comments.
 
 * /calc/ is a simple web calculator made for practice.
 
