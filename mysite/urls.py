@@ -23,6 +23,9 @@ urlpatterns = [
 
     # pulls in URLconf for calc app
     path('calc/', include('calc.urls')),
+
+    # pulls in URLconf for viz app
+    path('viz/', include('viz.urls')),
     
     # this is the only case not to use include()
     path('admin/', admin.site.urls),
