@@ -2,16 +2,18 @@
     <body>
 
         <div class="main">
-            <h1>Hello world!</h1>
+            {% load static %}
+            <img class='chart' src='{% static "viz/test.png" %}' alt='a test graph'>
         </div>
 
         <script>
         </script> 
 
         <style>
-            .main{
-                height: 90%;
-                position:relative;
+            .chart {
+                max-height: 100%;
+                max-width: 95vw;
+                width: auto;
             }                       
         </style>
 
