@@ -6,8 +6,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-import xml.etree.ElementTree as et
-import urllib.request as rq
 from viz.utils import fetch_bgg_data, parse_xml
 
 games = {"Agricola":31260, "Avalon":128882, "Azul":230802, "Keyflower":122515, "Kingdom Builder":107529}
@@ -17,6 +15,6 @@ def index(request):
 
     print(df)
 
-    sns.lineplot(data=df, x="yearpublished", y="maxplayers")
+    sns.scatterplot(data=df, x='yearpublished', y='maxplayers')
     plt.savefig(f'viz/static/viz/test.png') # save file to be referenced in index.html
     return render(request, 'viz/index.html') 

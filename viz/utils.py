@@ -8,17 +8,16 @@ def fetch_bgg_data(game_ids: list):
         result += f'{v},'
     return rq.urlopen(f'https://boardgamegeek.com/xmlapi/boardgame/{result}')
 
-def parse_xml(file):
+def parse_xml(xml_data):
     cols = ["name", "yearpublished", "minplayers", "maxplayers"]
     rows = []
 
-    tree = et.parse(file)    
-    root = tree.getroot()
+    root = et.parse(xml_data).getroot()
     for i in root:
         name = i.find("name").text
-        year = i.find("yearpublished").text
-        minplayers = i.find("minplayers").text
-        maxplayers = i.find("maxplayers").text
+        year = int(i.find("yearpublished").text)
+        minplayers = int(i.find("minplayers").text)
+        maxplayers = int(i.find("maxplayers").text)
 
         rows.append({
             "name": name,
