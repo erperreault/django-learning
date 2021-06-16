@@ -6,40 +6,18 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from viz.utils import fetch_data_by_ids, parse_xml, get_game_ids_by_username
-
-games = {
-        "Agricola":31260, 
-        "Avalon":128882, 
-        "Azul":230802, 
-        "Keyflower":122515, 
-        "Kingdom Builder":107529
-}
-
-supported_fields = [
-    'yearpublished',
-    'minplayers',
-    'maxplayers',
-    'playingtime',
-    'minplaytime',
-    'maxplaytime',
-    'age',
-    'name',
-    'description',
-    'thumbnail',
-    'image',
-    'boardgamepublisher',
-]
+from viz.BGGClient import BGGClient
+from viz.Grapher import Grapher
+from viz.test_data import games, supported_fields
 
 def index(request):
-    ids = get_game_ids_by_username('seepieceeggshell')
-    games_xml = fetch_data_by_ids(ids)
-    fields = ["name", "yearpublished", "minplayers", "maxplayers"]
+    client = BGGClient('seepieceeggshell')
+    fields = supported_fields
 
-    df = parse_xml(games_xml, fields)
+    df = client.yield_dataframe(fields)
 
     print(df)
 
     sns.scatterplot(data=df, x='yearpublished', y='maxplayers')
     plt.savefig(f'viz/static/viz/test.png') # save as file to be referenced in index.html
-    return render(request, 'viz/index.html') 
+    return render(request, 'viz/index.html')
