@@ -6,7 +6,7 @@ A simple website with learning and practice projects using Django, Python, HTML,
 
 * /calc/ is a simple web calculator made for practice.
 
-* /viz/ is an (in-progress) data visualization webapp. It pulls data from BoardGameGeek's database and offers various options for displaying and interacting with the data.
+* /viz/ is an (in-progress) data visualization webapp. It pulls data from BoardGameGeek's database and offers various options for displaying and interacting with the data. Currently visualization is done via Seaborn and returned as static image files.
 
 To run locally, first ensure that you have Python and Django installed:
 
