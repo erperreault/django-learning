@@ -39,10 +39,9 @@ class BGGClient:
         returns: xml string from BGG api
         """
 
-        formatted_ids = ""
+        url = 'https://boardgamegeek.com/xmlapi/boardgame/'
         for i in self.ids:
-            formatted_ids += f'{i},'
-        url = f'https://boardgamegeek.com/xmlapi/boardgame/{formatted_ids}'
+            url += f'{i},'
 
         self.collection_xml = rq.urlopen(url)
         return self.collection_xml
@@ -59,11 +58,14 @@ class BGGClient:
 
         for item in root:
             entry = {}
+            for name in item.findall('name'):
+                if name.get('primary'):
+                    entry['name'] = name.text
+                    print(entry['name'] )
             for field in fields:
                 try:
                     entry[field] = int(item.find(field).text)
                 except Exception as e:
-                    # print(e)
                     entry[field] = item.find(field).text
             rows.append(entry)
 

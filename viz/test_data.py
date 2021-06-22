@@ -14,7 +14,5 @@ supported_fields = [
     'minplaytime',
     'maxplaytime',
     'age',
-    'name',
-    'description',
     'boardgamepublisher',
 ]

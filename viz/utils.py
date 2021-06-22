@@ -2,7 +2,15 @@ import urllib.request as rq
 import xml.etree.ElementTree as et
 import pandas as pd
 
-def render_chart_from_data(dataframe):
-    """
-    Given pandas dataframe and chart options, return chart image.
-    """
+from viz.BGGClient import BGGClient
+from viz.Grapher import Grapher
+from viz.test_data import games, supported_fields
+
+def test_render():
+    client = BGGClient('seepieceeggshell')
+    df = client.yield_dataframe(supported_fields)
+
+    print(df.head(5))
+
+    grapher = Grapher(df)
+    grapher.scatter('yearpublished', 'maxplayers')
