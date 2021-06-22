@@ -8,15 +8,11 @@ A simple website with learning and practice projects using Django, Python, HTML,
 
 * /viz/ is an (in-progress) data visualization webapp. It pulls data from BoardGameGeek's database and offers various options for displaying and interacting with the data. Currently visualization is done via Seaborn and returned as static image files.
 
-To run locally, first ensure that you have Python and Django installed:
+To run locally:
+* `git clone https://github.com/erperreault/django-learning`
+* From the django-learning directory, `python -m venv venv` to create a new virtual environment
+* `source venv/bin/activate` to start the virtual environment
+* `pip install -r requirements.txt` to install dependencies
+* From then on, `python manage.py runserver` while in your virtual environment to run the project
 
-```
-$ python --version
-Python 3.9.5
-$ python -m django --version
-3.2.3
-```
-
-If either is missing, follow the [official installation instructions](https://docs.djangoproject.com/en/3.2/intro/install/). 
-
-Then, `git clone https://github.com/erperreault/` and run `python manage.py runserver` from the base directory. Access the polls app at http://localhost:8000/polls, calc at http://localhost:8000/calc/, and admin features at http://localhost:8000/admin/.
+Access the polls app at http://localhost:8000/polls, calc at http://localhost:8000/calc/, viz at http://localhost:8000/calc/ and admin features at http://localhost:8000/admin/.
