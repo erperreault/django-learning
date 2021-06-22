@@ -10,7 +10,5 @@ def test_render():
     client = BGGClient('seepieceeggshell')
     df = client.yield_dataframe(supported_fields)
 
-    print(df.head(5))
-
     grapher = Grapher(df)
     grapher.scatter('yearpublished', 'maxplayers')
