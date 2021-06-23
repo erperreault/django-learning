@@ -1,11 +1,22 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-import numpy as np
-import pandas as pd
+from .utils import test_render
+from .forms import BGGForm
 
-from viz.utils import test_render
+def form(request):
+    if request.method == 'POST':
+        form = BGGForm(request.POST)
 
-def index(request):
-    test_render()
-    return render(request, 'viz/index.html')
+        if form.is_valid():
+            print(form.cleaned_data)
+            test_render(form.cleaned_data)
+            return HttpResponseRedirect('/chart/')
+
+    else:
+        form = BGGForm()
+
+    return render(request, 'viz/form.html', {'form':form})
+
+def chart(request):
+    return render(request, 'viz/chart.html')
