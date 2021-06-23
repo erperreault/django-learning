@@ -61,7 +61,6 @@ class BGGClient:
             for name in item.findall('name'):
                 if name.get('primary'):
                     entry['name'] = name.text
-                    print(entry['name'] )
             for field in fields:
                 try:
                     entry[field] = int(item.find(field).text)

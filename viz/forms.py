@@ -1,15 +1,5 @@
 from django import forms
-
-data_fields = [
-    ('yearpublished', 'Year Published'),
-    ('minplayers', 'Min Players'),
-    ('maxplayers', 'Max Players'),
-    ('playingtime', 'Playing Time'),
-    ('minplaytime', 'Min Play Time'),
-    ('maxplaytime', 'Max Play Time'),
-    ('age', 'Age'),
-    ('boardgamepublisher', 'Publisher'),
-]
+from .settings import data_fields
 
 class BGGForm(forms.Form):
     username = forms.CharField(label='Username:', max_length=32)

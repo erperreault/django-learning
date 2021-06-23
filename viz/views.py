@@ -3,9 +3,8 @@ from django.shortcuts import render
 
 from .BGGClient import BGGClient
 from .Grapher import Grapher
-from .utils import test_render
 from .forms import BGGForm
-from .test_data import supported_fields
+from .settings import data_fields
 
 def form(request):
     if request.method == 'POST':
@@ -13,7 +12,7 @@ def form(request):
 
         if form.is_valid():
             client = BGGClient(form.cleaned_data['username'])
-            df = client.yield_dataframe(supported_fields)
+            df = client.yield_dataframe([f[0] for f in data_fields])
             grapher = Grapher(df)
 
             x_axis = form.cleaned_data['x_axis']
