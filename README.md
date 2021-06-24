@@ -1,4 +1,4 @@
-## Web Scratchpad
+## Django Showcase
 
 A simple website with learning and practice projects using Django, Python, HTML, CSS, and JavaScript.
 
