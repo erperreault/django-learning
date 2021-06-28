@@ -8,7 +8,7 @@ class BGGClient:
     and with optional filters.
     """
 
-    def __init__(self, username: str = ''):
+    def __init__(self, username):
         self.username = username
         self.ids = self.fetch_game_ids()
         self.collection_xml = self.fetch_data_by_ids()

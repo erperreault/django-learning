@@ -1,6 +1,7 @@
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+from .data import test_chart_path
 
 class Grapher:
     """
@@ -12,4 +13,5 @@ class Grapher:
 
     def scatter(self, x_axis, y_axis):
         sns.scatterplot(data=self.dataframe, x=x_axis, y=y_axis)
-        plt.savefig(f'viz/static/viz/test.png') # save as file > index.html
+        plt.savefig(test_chart_path)
+        plt.clf()
