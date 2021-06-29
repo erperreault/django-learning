@@ -1,0 +1,13 @@
+<html>
+    <body>
+      <form action="/viz/" method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <br><br>
+
+        <input type="submit" value="Render">
+
+      </form>
+    </body>
+</html>

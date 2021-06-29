@@ -7,5 +7,6 @@ app_name = 'viz'
 
 urlpatterns = [
     # path '' = root
-    path('', views.index, name='index'),
+    path('', views.form, name='form'),
+    path('chart', views.chart, name='chart'),
 ]
