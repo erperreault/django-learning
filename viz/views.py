@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .BGGClient import BGGClient
 from .Grapher import Grapher
 from .forms import BGGForm
-from .settings import data_fields
+from .data import data_fields
 
 def form(request):
     if request.method == 'POST':
