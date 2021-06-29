@@ -12,7 +12,7 @@ def form(request):
 
         if form.is_valid():
             client = BGGClient(form.cleaned_data['username'])
-            df = client.yield_dataframe([f[0] for f in data_fields])
+            df = client.yield_dataframe()
             grapher = Grapher(df)
 
             x_axis = form.cleaned_data['x_axis']

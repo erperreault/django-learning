@@ -12,6 +12,7 @@ class Grapher:
         self.dataframe = df
 
     def scatter(self, x_axis, y_axis):
+        print(self.dataframe)
         sns.scatterplot(data=self.dataframe, x=x_axis, y=y_axis)
         plt.savefig(test_chart_path)
         plt.clf()

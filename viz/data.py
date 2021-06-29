@@ -9,9 +9,8 @@ data_fields = [
     ('maxplaytime', 'Max Play Time'),
     ('age', 'Age'),
     ('boardgamepublisher', 'Publisher'),
-    ('usersrated', 'Number of Ratings'),
 ]
 
 stat_fields = [
-    'usersrated',
+    ('usersrated', 'Number of Ratings'),
 ]

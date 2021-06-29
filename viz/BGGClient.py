@@ -2,7 +2,10 @@ import urllib.request as rq
 import xml.etree.ElementTree as et
 import pandas as pd
 
-from .data import stat_fields
+from .data import stat_fields as s_fields
+stat_fields = [f[0] for f in s_fields]
+from .data import data_fields as d_fields
+data_fields = [f[0] for f in d_fields]
 
 class BGGClient:
     """
@@ -47,7 +50,7 @@ class BGGClient:
 
         return rq.urlopen(url)
 
-    def yield_dataframe(self, fields: list):
+    def yield_dataframe(self):
         """
         Pull desired fields from provided XML and return a dataframe of the results.
 
@@ -63,15 +66,15 @@ class BGGClient:
             for name in game.findall('name'):
                 if name.get('primary'):
                     entry['name'] = name.text
-            for field in fields:
-                try:
-                    entry[field] = int(game.find(field).text)
-                except:
-                    entry[field] = game.find(field).text
+            for field in data_fields:
+                if game.find(field) is not None:
+                    try:
+                        entry[field] = int(game.find(field).text)
+                    except:
+                        entry[field] = game.find(field).text
             rows.append(entry)
-            print(rows)
 
-        df = pd.DataFrame(rows, columns=fields)
+        df = pd.DataFrame(rows, columns=data_fields+stat_fields)
 
         return df
 
