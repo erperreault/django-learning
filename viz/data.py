@@ -1,5 +1,13 @@
 test_chart_path = 'viz/static/viz/test.png'
 
+stat_fields = [
+    ('usersrated', 'Number of Ratings'),
+    ('average', 'Average Rating'),
+    ('bayesaverage', 'Bayesian Average Rating'),
+    ('owned', 'BGG Owners'),
+    ('averageweight', 'Average Complexity'),
+]
+
 data_fields = [
     ('yearpublished', 'Year Published'),
     ('minplayers', 'Min Players'),
@@ -9,8 +17,4 @@ data_fields = [
     ('maxplaytime', 'Max Play Time'),
     ('age', 'Age'),
     ('boardgamepublisher', 'Publisher'),
-]
-
-stat_fields = [
-    ('usersrated', 'Number of Ratings'),
 ]

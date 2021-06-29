@@ -82,4 +82,7 @@ class BGGClient:
         for stat in game.findall('statistics'):
             for each in stat.iter():
                 if each.tag in stat_fields:
-                    entry[each.tag] = int(each.text)
+                    try:
+                        entry[each.tag] = int(each.text)
+                    except ValueError:
+                        entry[each.tag] = float(each.text)
