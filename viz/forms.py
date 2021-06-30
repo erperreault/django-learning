@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.safestring import mark_safe
+
 from .data import data_fields
 from .data import stat_fields
 

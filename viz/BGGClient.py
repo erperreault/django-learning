@@ -44,7 +44,13 @@ class BGGClient:
 
         id_list = ''
         for i in self.ids:
-            id_list += f'{i},'
+            # 8190 is Apache default max URL, this accounts for len of url below
+            if len(id_list) + len(i) < 8151:
+                id_list += f'{i},'
+            else:
+                # for extremely large collections, some games will be left off
+                # the limit is something like 1400 titles (avg len 5.67...)
+                break
 
         url = f'https://boardgamegeek.com/xmlapi/boardgame/{id_list}?stats=1'
 
