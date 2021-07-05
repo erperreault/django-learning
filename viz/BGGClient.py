@@ -3,8 +3,9 @@ import xml.etree.ElementTree as et
 import pandas as pd
 
 from .data import stat_fields as s_fields
-stat_fields = [f[0] for f in s_fields]
 from .data import data_fields as d_fields
+
+stat_fields = [f[0] for f in s_fields]
 data_fields = [f[0] for f in d_fields]
 
 class BGGClient:
@@ -14,7 +15,7 @@ class BGGClient:
     """
 
     def __init__(self, username):
-        self.username = username
+        self.username = username.replace(' ', '%20')
         self.ids = self.fetch_game_ids()
         self.collection_xml = self.fetch_data_by_ids()
 
