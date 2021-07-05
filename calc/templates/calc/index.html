@@ -23,7 +23,7 @@
                         event.preventDefault();
                         listening = false;
                     } else {
-                        if (/^[a-zA-Z0-9.+*\-]$/.test(event.key)) {
+                        if (/^[0-9.+*\-]$/.test(event.key)) {
                             if (screen.value.length < 16) {
                                 screen.value += event.key;
                             }
@@ -70,13 +70,13 @@
                     screen.value = '';
                 }
             }
-        </script> 
+        </script>
 
         <style>
             .main{
                 height: 90%;
                 position:relative;
-            }            
+            }
 
             .screen {
                 width:255;
@@ -89,7 +89,7 @@
                 font-size:25;
                 font-family:monospace;
                 text-align:right;
-            }            
+            }
         </style>
 
     </body>

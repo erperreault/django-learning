@@ -3,8 +3,9 @@ import xml.etree.ElementTree as et
 import pandas as pd
 
 from .data import stat_fields as s_fields
-stat_fields = [f[0] for f in s_fields]
 from .data import data_fields as d_fields
+
+stat_fields = [f[0] for f in s_fields]
 data_fields = [f[0] for f in d_fields]
 
 class BGGClient:
@@ -14,7 +15,7 @@ class BGGClient:
     """
 
     def __init__(self, username):
-        self.username = username
+        self.username = username.replace(' ', '%20')
         self.ids = self.fetch_game_ids()
         self.collection_xml = self.fetch_data_by_ids()
 
@@ -44,7 +45,13 @@ class BGGClient:
 
         id_list = ''
         for i in self.ids:
-            id_list += f'{i},'
+            # 8190 is Apache default max URL, this accounts for len of url below
+            if len(id_list) + len(i) < 8151:
+                id_list += f'{i},'
+            else:
+                # for extremely large collections, some games will be left off
+                # the limit is something like 1400 titles (avg len 5.67...)
+                break
 
         url = f'https://boardgamegeek.com/xmlapi/boardgame/{id_list}?stats=1'
 
