@@ -1,17 +1,21 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .BGGClient import BGGClient
 from .Grapher import Grapher
 from .forms import BGGForm
-from .data import data_fields
 
 def form(request):
     if request.method == 'POST':
         form = BGGForm(request.POST)
 
         if form.is_valid():
-            client = BGGClient(form.cleaned_data['username'])
+            try:
+                client = BGGClient(form.cleaned_data['username'])
+            except:
+                return render(request, 'viz/error.html', {'form':form})
+
+
             df = client.yield_dataframe()
             grapher = Grapher(df)
 
