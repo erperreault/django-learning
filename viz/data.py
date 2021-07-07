@@ -17,7 +17,11 @@ data_fields = [
     ('minplaytime', 'Min Play Time'),
     ('maxplaytime', 'Max Play Time'),
     ('age', 'Age'),
-    ('boardgamepublisher', 'Publisher'),
+]
+
+chart_types = [
+    ('scatter', 'Scatter Plot'),
+    ('dist', 'Distribution Plot (Bar Chart)'),
 ]
 
 # for displaying nicely formatted axis labels instead of the internal ones

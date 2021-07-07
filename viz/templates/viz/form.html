@@ -2,12 +2,26 @@
     <body>
       <form action="/viz/" method="post">
         {% csrf_token %}
-        {{ form }}
+        <div id='username'>{{form.username.label}} {{form.username}}</div>
+        <div id='chart_type'>{{form.chart_type.label}} {{form.chart_type}}</div>
+        <div id='x_axis'>{{form.x_axis.label}} {{form.x_axis}}</div>
+        <div id='y_axis'>{{form.y_axis.label}} {{form.y_axis}}</div>
 
         <br><br>
 
         <input type="submit" value="Render">
-
       </form>
+
+      <script>
+        document.getElementById('chart_type').addEventListener('change', (event) => {
+          if (event.target.value == 'dist') {
+            document.getElementById('y_axis').style.display = 'none';
+          }
+          else {
+            document.getElementById('y_axis').style.display = '';
+          }
+        })
+      </script>
+
     </body>
 </html>

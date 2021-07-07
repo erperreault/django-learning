@@ -19,9 +19,10 @@ def form(request):
             df = client.yield_dataframe()
             grapher = Grapher(df)
 
+            chart_type = form.cleaned_data['chart_type']
             x_axis = form.cleaned_data['x_axis']
             y_axis = form.cleaned_data['y_axis']
-            grapher.scatter(x_axis, y_axis)
+            grapher.render_input(chart_type, x_axis, y_axis)
             return HttpResponseRedirect('chart')
 
     else:
