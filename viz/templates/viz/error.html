@@ -1,0 +1,15 @@
+<html>
+    <body>
+      <form action="/viz/" method="post">
+        {% csrf_token %}
+          <div>
+              Username not found, please double-check and try again.
+          </div>
+
+        <br><br>
+
+        <input type="button" value="Go Back" onclick="history.back()">
+
+      </form>
+    </body>
+</html>
