@@ -1,5 +1,6 @@
 test_chart_path = 'viz/static/viz/test.png'
 
+# these are separated because the BGG database has them formatted differently
 stat_fields = [
     ('usersrated', 'Number of Ratings'),
     ('average', 'Average Rating'),
@@ -18,3 +19,8 @@ data_fields = [
     ('age', 'Age'),
     ('boardgamepublisher', 'Publisher'),
 ]
+
+# for displaying nicely formatted axis labels instead of the internal ones
+nice_dict = {
+    field[0]:field[1] for field in stat_fields+data_fields
+    }
