@@ -2,7 +2,7 @@
     <body>
         <div>
             {% load static %}
-            <img class='chart' src='{% static "viz/test.png" %}' alt='a test graph'>
+            <img class='chart' src='{% static chart_filepath %}' alt='{{ chart_filepath }}'>
         </div>
 
         <style>

@@ -1,4 +1,4 @@
-test_chart_path = 'viz/static/viz/test.png'
+image_directory = 'viz/static/viz/'
 
 # these are separated because the BGG database has them formatted differently
 stat_fields = [

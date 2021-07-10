@@ -25,7 +25,8 @@ def form(request):
             x_axis = form.cleaned_data['x_axis']
             y_axis = form.cleaned_data['y_axis']
             grapher.render_input(chart_type, x_axis, y_axis)
-            return HttpResponseRedirect('chart')
+            fp = grapher.chart_filepath.split('/', 2)[2]
+            return render(request, 'viz/chart.html', {'form':form, 'chart_filepath':fp})
 
     else:
         form = BGGForm()
