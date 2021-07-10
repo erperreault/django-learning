@@ -8,8 +8,11 @@ from .data import chart_types
 class BGGForm(forms.Form):
     username = forms.CharField(label=('BoardGameGeek Username:'), max_length=32)
 
-    chart_type = forms.CharField(label=mark_safe('<br><br>Chart Type:'),
-        widget=forms.Select(choices=chart_types))
+    chart_type = forms.CharField(
+        label = mark_safe('<br><br>Chart Type:'),
+        widget = forms.Select(choices=chart_types),
+        initial = 'scatter',
+        )
 
     x_axis = forms.CharField(label=mark_safe('<br><br>X-Axis:'),
         widget=forms.Select(choices=stat_fields+data_fields))

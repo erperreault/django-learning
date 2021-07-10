@@ -1,4 +1,3 @@
-from os import nice
 import seaborn as sns
 import matplotlib.pyplot as plt
 from .data import test_chart_path, nice_dict
