@@ -4,12 +4,14 @@ from django.shortcuts import render
 from .BGGClient import BGGClient
 from .Grapher import Grapher
 from .forms import BGGForm
+from .utils import cleanup_old_charts
 
 def form(request):
     if request.method == 'POST':
         form = BGGForm(request.POST)
 
         if form.is_valid():
+            cleanup_old_charts()
             try:
                 client = BGGClient(form.cleaned_data['username'])
             except:
