@@ -1,6 +1,7 @@
 image_directory = 'viz/static/viz/'
 
-# these are separated because the BGG database has them formatted differently
+# stat_fields and data_fields are separated because the 
+# BGG database has them formatted differently
 stat_fields = [
     ('usersrated', 'Number of Ratings'),
     ('average', 'Average Rating'),
@@ -22,9 +23,8 @@ data_fields = [
 chart_types = [
     ('scatter', 'Scatter Plot'),
     ('dist', 'Distribution Plot (Bar Chart)'),
+    ('cat', 'Category Plot'),
 ]
 
 # for displaying nicely formatted axis labels instead of the internal ones
-nice_dict = {
-    field[0]:field[1] for field in stat_fields+data_fields
-    }
+nice_dict = { field[0]:field[1] for field in stat_fields+data_fields }
