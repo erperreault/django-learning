@@ -11,6 +11,7 @@ class Grapher:
     def __init__(self, df):
         self.dataframe = df
         self.chart_filepath = ''
+        sns.axes_style({"axes.facecolor": "black"})
 
     def render_input(self, chart_type, x_axis, y_axis):
         if chart_type == 'scatter':

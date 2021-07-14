@@ -1,11 +1,11 @@
 <html>
     <body>
-      <form action="/viz/" method="post">
+      <form class='container' action="/viz/" method="post">
         {% csrf_token %}
-        <div id='username'>{{form.username.label}} {{form.username}}</div>
-        <div id='chart_type'>{{form.chart_type.label}} {{form.chart_type}}</div>
-        <div id='x_axis'>{{form.x_axis.label}} {{form.x_axis}}</div>
-        <div id='y_axis'>{{form.y_axis.label}} {{form.y_axis}}</div>
+        <div class='field' id='username'>{{form.username.label}} {{form.username}}</div>
+        <div class='field' id='chart_type'>{{form.chart_type.label}} {{form.chart_type}}</div>
+        <div class='field' id='x_axis'>{{form.x_axis.label}} {{form.x_axis}}</div>
+        <div class='field' id='y_axis'>{{form.y_axis.label}} {{form.y_axis}}</div>
 
         <br><br>
 
@@ -22,6 +22,25 @@
           }
         })
       </script>
+
+      <style>
+        body {
+          background-color: #282828;
+        }
+
+        .container {
+          text-align: center;
+          max-height: 100%;
+          max-width: 95vw;
+          width: auto;
+          offset: auto;
+          transform: translate(0%, 50%);
+        }
+
+        .field {
+          color: white;
+        }
+      </style>
 
     </body>
 </html>
