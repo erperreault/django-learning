@@ -15,4 +15,4 @@ To run locally:
 * `pip install -r requirements.txt` to install dependencies
 * From then on, `python manage.py runserver` while in your virtual environment to run the project
 
-Access the polls app at http://localhost:8000/polls, calc at http://localhost:8000/calc/, viz at http://localhost:8000/calc/ and admin features at http://localhost:8000/admin/.
+Access the polls app at http://localhost:8000/polls, calc at http://localhost:8000/calc/, viz at http://localhost:8000/viz/ and admin features at http://localhost:8000/admin/.
