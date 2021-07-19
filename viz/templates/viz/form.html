@@ -2,10 +2,42 @@
     <body>
       <form class='container' action="/viz/" method="post">
         {% csrf_token %}
-        <div class='field' id='username'>{{form.username.label}} {{form.username}}</div>
-        <div class='field' id='chart_type'>{{form.chart_type.label}} {{form.chart_type}}</div>
-        <div class='field' id='x_axis'>{{form.x_axis.label}} {{form.x_axis}}</div>
-        <div class='field' id='y_axis'>{{form.y_axis.label}} {{form.y_axis}}</div>
+
+        <div class='row'>
+          <div class='column'>
+            <div class='label'>{{form.username.label}}</div>
+          </div>
+          <div class='column'>
+            <div class='field' id='username'>{{form.username}}</div>
+          </div>
+        </div><br>
+
+        <div class='row'>
+          <div class='column'>
+            <div class='label'>{{form.chart_type.label}}</div>
+          </div>
+          <div class='column'>
+            <div class='field' id='chart_type'>{{form.chart_type}}</div>
+          </div>
+        </div><br>
+
+        <div class='row'>
+          <div class='column'>
+            <div class='label'>{{form.x_axis.label}}</div>
+          </div>
+          <div class='column'>
+            <div class='field' id='x_axis'>{{form.x_axis}}</div>
+          </div>
+        </div><br>
+
+        <div class='row'>
+          <div class='column'>
+            <div class='label'>{{form.y_axis.label}}</div>
+          </div>
+          <div class='column'>
+            <div class='field' id='y_axis'>{{form.y_axis}}</div>
+          </div>
+        </div><br>
 
         <br><br>
 
@@ -28,17 +60,32 @@
           background-color: #282828;
         }
 
-        .container {
-          text-align: center;
-          max-height: 100%;
-          max-width: 95vw;
-          width: auto;
-          offset: auto;
-          transform: translate(0%, 50%);
+        .row {
+          display: flex;
+          width: 100%
+        }
+
+        .column {
+          display: flex;
+          flex-direction: column;
+          flex-basis: 100%;
+          flex: 1;
+        }
+
+        .label {
+          text-align: right;
+          color: white;
         }
 
         .field {
+          text-align: left;
+          padding-left: 2%;
           color: white;
+        }
+
+        .container {
+          text-align: center;
+          transform: translate(0%, 50%);
         }
       </style>
 

@@ -5,6 +5,8 @@ import pandas as pd
 from .data import stat_fields as s_fields
 from .data import data_fields as d_fields
 
+from .models import User
+
 stat_fields = [f[0] for f in s_fields]
 data_fields = [f[0] for f in d_fields]
 
@@ -15,9 +17,24 @@ class BGGClient:
     """
 
     def __init__(self, username):
+        '''
+        if username in database:
+            if db.creation_time < 5_minutes_ago:
+                self.username = db.username
+                self.collection_xml = db.xml_data
+            
+
+        else:'''
         self.username = username.replace(' ', '%20')
         self.ids = self.fetch_game_ids()
         self.collection_xml = self.fetch_data_by_ids()
+        
+        user = User()
+        user.username = self.username
+        user.collection = self.yield_dataframe()
+        print(user.collection)
+        # user.save()
+
 
     def fetch_game_ids(self):
         """
@@ -31,6 +48,7 @@ class BGGClient:
             )
 
         root = et.parse(data).getroot()
+
         ids = [item.attrib['objectid'] for item in root]
 
         return ids
@@ -40,7 +58,7 @@ class BGGClient:
         Fetch complete game data for all listed games.
 
         game_ids ex: [486, 68413, 84015, 840]
-        returns: xml string from BGG api
+        returns: xml object from BGG api
         """
 
         id_list = ''
@@ -55,7 +73,11 @@ class BGGClient:
 
         url = f'https://boardgamegeek.com/xmlapi/boardgame/{id_list}?stats=1'
 
-        return rq.urlopen(url)
+        xml = rq.urlopen(url)
+
+        # user.save()
+
+        return xml
 
     def yield_dataframe(self):
         """
