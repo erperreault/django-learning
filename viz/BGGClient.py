@@ -31,8 +31,9 @@ class BGGClient:
         
         user = User()
         user.username = self.username
-        user.collection = self.yield_dataframe()
-        print(user.collection)
+        print(user.username)
+        # user.collection = self.yield_dataframe()
+        # print(user.collection)
         # user.save()
 
 
@@ -74,8 +75,6 @@ class BGGClient:
         url = f'https://boardgamegeek.com/xmlapi/boardgame/{id_list}?stats=1'
 
         xml = rq.urlopen(url)
-
-        # user.save()
 
         return xml
 

@@ -15,8 +15,6 @@ def form(request):
             try:
                 client = BGGClient(form.cleaned_data['username'])
             except:
-                # most errors are either 1- bad username or 2- too frequent requests.
-                # 2 can be avoided by saving user XML to db for 5 min; future improvement
                 return render(request, 'viz/error.html', {'form':form})
 
             df = client.yield_dataframe()
