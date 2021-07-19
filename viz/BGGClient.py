@@ -5,8 +5,6 @@ import pandas as pd
 from .data import stat_fields as s_fields
 from .data import data_fields as d_fields
 
-from .models import User
-
 stat_fields = [f[0] for f in s_fields]
 data_fields = [f[0] for f in d_fields]
 
@@ -28,13 +26,6 @@ class BGGClient:
         self.username = username.replace(' ', '%20')
         self.ids = self.fetch_game_ids()
         self.collection_xml = self.fetch_data_by_ids()
-        
-        user = User()
-        user.username = self.username
-        print(user.username)
-        # user.collection = self.yield_dataframe()
-        # print(user.collection)
-        # user.save()
 
 
     def fetch_game_ids(self):
