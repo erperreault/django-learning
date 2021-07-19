@@ -1,11 +1,13 @@
-from django.http import HttpResponseRedirect
+import pandas as pd
+
 from django.shortcuts import render
 
 from .BGGClient import BGGClient
 from .Grapher import Grapher
 from .forms import BGGForm
 from .models import User
-from .utils import cleanup_old_charts
+from .utils import cleanup_old_charts, cleanup_old_collections
+
 from datetime import datetime
 
 def form(request):
@@ -13,21 +15,33 @@ def form(request):
         form = BGGForm(request.POST)
 
         if form.is_valid():
-            cleanup_old_charts() # remove image files older than 5min from static/viz
+            cleanup_old_charts()
+            cleanup_old_collections()
+
+            username = form.cleaned_data['username']
 
             try:
-                client = BGGClient(form.cleaned_data['username'])
+                user = User.objects.get(username=username)
             except:
-                return render(request, 'viz/error.html', {'form':form})
+                user = False
 
-            df = client.yield_dataframe()
-            grapher = Grapher(df)
+            if user:
+                df = pd.read_json(user.xml_data)
+            else:
+                try:
+                    client = BGGClient(form.cleaned_data['username'])
+                    df = client.yield_dataframe()
         
-            user = User()
-            user.username = client.username
-            user.creation_time = datetime.now()
-            user.collection = df
-            user.save()
+                    user = User()
+                    user.username = client.username
+                    user.creation_time = datetime.now()
+                    user.xml_data = df.to_json()
+                    user.save()
+
+                except:
+                    return render(request, 'viz/error.html', {'form':form})
+                    
+            grapher = Grapher(df)
 
             chart_type = form.cleaned_data['chart_type']
             x_axis = form.cleaned_data['x_axis']
