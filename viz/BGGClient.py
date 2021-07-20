@@ -10,14 +10,14 @@ data_fields = [f[0] for f in d_fields]
 
 class BGGClient:
     """
-    Retrieves and holds a user's game list, returns it in various formats
-    and with optional filters.
+    Retrieves a user's collection data from BGG.
     """
 
     def __init__(self, username):
         self.username = username.replace(' ', '%20')
         self.ids = self.fetch_game_ids()
         self.collection_xml = self.fetch_data_by_ids()
+
 
     def fetch_game_ids(self):
         """
@@ -32,7 +32,6 @@ class BGGClient:
 
         root = et.parse(data).getroot()
         ids = [item.attrib['objectid'] for item in root]
-
         return ids
 
     def fetch_data_by_ids(self):
@@ -40,7 +39,7 @@ class BGGClient:
         Fetch complete game data for all listed games.
 
         game_ids ex: [486, 68413, 84015, 840]
-        returns: xml string from BGG api
+        returns: xml object from BGG api
         """
 
         id_list = ''
@@ -55,7 +54,9 @@ class BGGClient:
 
         url = f'https://boardgamegeek.com/xmlapi/boardgame/{id_list}?stats=1'
 
-        return rq.urlopen(url)
+        xml = rq.urlopen(url)
+
+        return xml
 
     def yield_dataframe(self):
         """
@@ -86,6 +87,11 @@ class BGGClient:
         return df
 
     def get_stats_for_item(self, game, entry):
+        """
+        Method to clean up data formatted as 'stats' in BGG database.
+
+        returns: none
+        """
         for stat in game.findall('statistics'):
             for each in stat.iter():
                 if each.tag in stat_fields:

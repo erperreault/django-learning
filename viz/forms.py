@@ -6,16 +6,17 @@ from .data import stat_fields
 from .data import chart_types
 
 class BGGForm(forms.Form):
-    username = forms.CharField(label=('BoardGameGeek Username:'), max_length=32)
+    username = forms.CharField(label=('BoardGameGeek Username:'), max_length=32,
+        widget=forms.TextInput(attrs={'color':'#282828'}))
 
     chart_type = forms.CharField(
-        label = mark_safe('<br><br>Chart Type:'),
+        label = mark_safe('<br>Chart Type:'),
         widget = forms.Select(choices=chart_types),
         initial = 'scatter',
         )
 
-    x_axis = forms.CharField(label=mark_safe('<br><br>X-Axis:'),
+    x_axis = forms.CharField(label=mark_safe('<br>X-Axis:'),
         widget=forms.Select(choices=stat_fields+data_fields))
 
-    y_axis = forms.CharField(label=mark_safe('<br><br>Y-Axis:'),
+    y_axis = forms.CharField(label=mark_safe('<br>Y-Axis:'),
         widget=forms.Select(choices=stat_fields+data_fields))
