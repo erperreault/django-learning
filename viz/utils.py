@@ -1,10 +1,10 @@
 import time
 import os
-import random
 from datetime import datetime, timedelta
-from .data import image_directory
 from .models import User
 import pytz
+
+# Simple functions to clean up chart image files and database entries older than 5 minutes.
 
 def cleanup_old_charts():
     now = time.mktime(datetime.now().timetuple())
@@ -25,14 +25,3 @@ def cleanup_old_collections():
             x.delete()
         else:
             print('Entry younger than 5 minutes; loading...')
-
-
-def new_chart_filepath():
-    img_dir = os.listdir(image_directory)
-    keys = [int(file.split('.')[0]) for file in img_dir]
-    filename = random.randint(1000000,9999999)
-
-    while filename in keys:
-        filename = random.randint(1000000,9999999)
-        
-    return image_directory + str(filename) + '.jpg'
