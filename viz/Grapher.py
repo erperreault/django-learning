@@ -7,6 +7,13 @@ from .data import nice_dict, image_directory
 class Grapher:
     def __init__(self, df):
         self.dataframe = df
+        sns.set(rc={
+            'axes.facecolor':'#282828', 
+            'figure.facecolor':'#282828', 
+            'axes.labelcolor': 'white',
+            'xtick.color':'white',
+            'ytick.color':'white',
+            })
 
     def set_chart_type(self, chart_type, x_axis, y_axis):
         if chart_type == 'scatter':
