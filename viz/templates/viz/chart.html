@@ -1,24 +1,28 @@
 <html>
     <body>
-        <div>
+        <div class='container'>
             {% load static %}
             <img class='chart' src='{% static chart_filepath %}' alt='{{ chart_filepath }}'>
+
+            <br><br>
+    
+            <input type="button" value="Go Back" onclick="history.back()">
         </div>
-
-        <br><br>
-
-        <input type="button" value="Go Back" onclick="history.back()">
 
         <style>
             body {
               background-color: #282828;
             }
-            
+
             .chart {
                 max-height: 100%;
                 max-width: 95vw;
                 width: auto;
                 offset: auto;
+            }
+
+            .container {
+                text-align: center;
             }
         </style>
 
