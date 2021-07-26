@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # pull in any desired apps here
+    'home.apps.HomeConfig',
     'viz.apps.VizConfig',
     'polls.apps.PollsConfig',
     'calc.apps.CalcConfig',
