@@ -19,7 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     # current project at root for convenience
-    # path('', include('viz.urls')),
+    path('', include('home.urls')),
 
     # pulls in URLconf for polls calc
     path('polls/', include('polls.urls')),
