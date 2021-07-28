@@ -9,9 +9,7 @@ stat_fields = [f[0] for f in s_fields]
 data_fields = [f[0] for f in d_fields]
 
 class BGGClient:
-    """
-    Retrieves a user's collection data from BGG.
-    """
+    """Retrieves a user's collection data from BGG."""
 
     def __init__(self, username):
         self.username = username.replace(' ', '%20')

@@ -6,6 +6,7 @@ from .data import stat_fields
 from .data import chart_types
 
 class BGGForm(forms.Form):
+    """The form takes user settings and passes them to Grapher."""
     username = forms.CharField(label=('BoardGameGeek Username:'), max_length=32,
         widget=forms.TextInput(attrs={'color':'#282828'}))
 
