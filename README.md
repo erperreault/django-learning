@@ -8,6 +8,8 @@ A simple website with learning and practice projects using Django, Python, HTML,
 
 * /viz/ is a **data visualization webapp**. It pulls data from BoardGameGeek's database and offers various options for displaying and interacting with the data. Currently visualization is done via Seaborn and returned as static image files.
 
+![ss](https://user-images.githubusercontent.com/69309175/127333744-3c0783db-6542-4d7f-8233-53b6c8c056db.png)
+
 To run locally:
 * `git clone https://github.com/erperreault/django-learning`
 * From the django-learning directory, `python -m venv venv` to create a new virtual environment
