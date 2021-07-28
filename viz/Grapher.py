@@ -16,6 +16,7 @@ class Grapher:
             })
 
     def set_chart_type(self, chart_type, x_axis, y_axis):
+        """Call the appropriate method for desired chart type."""
         if chart_type == 'scatter':
             return self.scatter(x_axis, y_axis)
         elif chart_type == 'cat':
@@ -24,6 +25,7 @@ class Grapher:
             return self.dist(x_axis)
 
     def render_chart(self):
+        """Save chart to /viz/static/viz"""
         plt.tight_layout()
         self.chart_filepath = self.new_chart_filepath()
         plt.savefig(self.chart_filepath)
@@ -48,6 +50,7 @@ class Grapher:
         self.render_chart()
 
     def new_chart_filepath(self):
+        """Generate a random key name to save chart."""
         img_dir = os.listdir(image_directory)
         keys = [int(file.split('.')[0]) for file in img_dir] # get the key without file extension
         filename = random.randint(1000000,9999999)

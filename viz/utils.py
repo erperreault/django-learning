@@ -7,6 +7,7 @@ import pytz
 # Simple functions to clean up chart image files and database entries older than 5 minutes.
 
 def cleanup_old_charts():
+    """Remove chart files older than 5 minutes."""
     now = time.mktime(datetime.now().timetuple())
     image_directory = 'viz/static/viz/'
 
@@ -18,6 +19,7 @@ def cleanup_old_charts():
                 os.remove(fp)
 
 def cleanup_old_collections():
+    """Remove user collections in database older than 5 minutes."""
     us = User.objects.all()
     for x in us:
         if datetime.now(pytz.utc) - x.creation_time > timedelta(minutes=5):
